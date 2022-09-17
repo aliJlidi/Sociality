@@ -6,6 +6,7 @@ import { PostsContainer } from "./PostGrid";
 import { GroupDate } from "./PostGrid";
 import postData from "../../../Data/data.json";
 import { Post } from "./PostGrid";
+import axios from "axios";
 var _ = require('lodash');
 const Container = styled.div`
 position:fixed;
@@ -150,18 +151,17 @@ export function Feed({open,active}){
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const statusArr = ["#F7BF38","#3AC183","#3AC183","#bbb","#FB6450"];
 
-    async function makeRequest(url) {
-        try {
-          const response = await fetch(url);
-      
-          if(response.status) return true;
-          
-      
-        } catch (err) {
-          return false ;
-        }
-        return false;
+    function makeRequest(url) {
+        console.log(url);
+        axios.get(url)
+          .then(res=> {
+           return res.status == 200  ?  true : false ; 
+          })
+          .catch(err => {
+             return false ;
+          });
       }
+      
     return(
         <>
         <Container width={open ||active ? "calc(100% - 300px)":"calc(100% - 70px)"}>
