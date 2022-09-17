@@ -119,7 +119,7 @@ height: 200px;
 text-align:center;
 margin:10px auto 10px auto;
 font-size:20px;
-background-image: ${({img})=> `url(${img});`}
+background-image:url( ${(props)=>props.img});
 background-position: center;
 background-size: cover ;
 transition-property: box-shadow margin-top filter;
@@ -150,6 +150,18 @@ export function Feed({open,active}){
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const statusArr = ["#F7BF38","#3AC183","#3AC183","#bbb","#FB6450"];
 
+    async function makeRequest(url) {
+        try {
+          const response = await fetch(url);
+      
+          if(response.status) return true;
+          
+      
+        } catch (err) {
+          return false ;
+        }
+        return false;
+      }
     return(
         <>
         <Container width={open ||active ? "calc(100% - 300px)":"calc(100% - 70px)"}>
@@ -184,7 +196,10 @@ export function Feed({open,active}){
                                              <PostText>
                                                 {element.entry.message}
                                              </PostText>
-                                             <PostPicture img={element.entry.image[0]}></PostPicture>
+                                         
+                                           {!makeRequest(element.entry.image[0]) ?   <PostPicture img={"/img/notFound.png"}/> : <PostPicture  img={element.entry.image[0]}/>} 
+
+                                           
 
                                              <PostFooter>
                                                 <Icon  imgUrl={"/img/like.png"} /> <Counter>0</Counter>
