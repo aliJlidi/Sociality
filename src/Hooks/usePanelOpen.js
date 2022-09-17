@@ -1,10 +1,8 @@
 import { useState } from "react";
-
-export function usePanelOpen(){
-    const [open ,setOpen] = useState(true);
-
+export function usePanelOpen() {
+    const [open, setOpen] = useState(true);
     return {
-        open ,
+        open,
         setOpen
-      };
-    }
+    };
+}
