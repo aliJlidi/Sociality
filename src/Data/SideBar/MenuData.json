@@ -1,21 +1,27 @@
 [
     {
-        "path":"group1.png"
+        "path":"/img/group1.png",
+        "indice":"g1"
     },
     {
-        "path":"group2.png"
+        "path":"/img/group2.png",
+        "indice":"g2"
     },
     {
-        "path":"group3.png"
+        "path":"/img/group3.png",
+        "indice":"g3"
     },
     {
-        "path":"group4.png"
+        "path":"/img/group4.png",
+        "indice":"g4"
     },
     {
-        "path":"group5.png"
+        "path":"/img/group5.png",
+        "indice":"g5"
     },
     {
-        "path":"group6.png"
+        "path":"/img/group6.png",
+        "indice":"g6"
     }
 ]
 

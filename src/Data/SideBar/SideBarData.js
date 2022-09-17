@@ -3,11 +3,12 @@ export const SideBarData = [
     {
         "title":"NOTIFICATIONS",
         "icon":<FaIcons.FaRegBell  size={25}/>,
-        "path":"/Notifications"
+        "path":"notifications"
     },
     {
         "title":"SUMMARY",
-        "icon":<FaIcons.FaChartBar   size={25}/>,
+        "icon":<FaIcons.FaBars  size={25}/>,
+        "path":"summary",
         "childrens":[
             {
                 "title":"SUB_MENU_1",
@@ -24,6 +25,7 @@ export const SideBarData = [
     {
         "title":"PUBLISH",
         "icon":<FaIcons.FaPenAlt   size={25}/>,
+        "path":"publish",
         "childrens":[
             {
                 "title":"Compose",
@@ -32,7 +34,7 @@ export const SideBarData = [
             },
             {
                 "title":"Feed",
-                "path":"/P-Feed"
+                "path":"publish/feed"
 
             }
         ]

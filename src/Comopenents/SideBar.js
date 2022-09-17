@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { SideBarData } from "../Data/SideBar/SideBarData";
 import MenuData from "../Data/SideBar/MenuData.json";
 import { IconContext } from 'react-icons/lib';
+import { Link } from 'react-router-dom';
 const SideBarCover = styled.div`
 height:100% ;
 bottom:0;
@@ -17,9 +18,9 @@ z-index:5;
 const Title = styled.div`
 margin-top:5px;
 margin-bottom:5px;
-margin-left:10px;
+margin-left:53px;
 height:40px;
-width: 200px;
+width: ${(props)=>props.width};
 text-align:center;
 `;
 const MenuStyled = styled.div`
@@ -138,7 +139,7 @@ text-align:center
 justify-items:center;
 align-content:center;
  margin:auto;
- width:100%;
+ width:auto;
  `;
 const ItemContent = styled.div`
 padding-top:${(props)=>props.padding};
@@ -168,16 +169,26 @@ padding-bottom:.5em;
 const I = styled.i`
 color:${(props)=>props.color};
 `;
-export function SideBar() {
-    const [open ,setOpen] = useState(false);
-    const [active,setActive] = useState(false);
-    const [ind , setInd] = useState();
-    const [ind2, setInd2] = useState();
-    const [indChild, setChildInd] = useState();
+export function SideBar({open ,setOpen,active,setActive}) {
+   
+   
+    const [ind , setInd] = useState(2);
+    const [ind2, setInd2] = useState(3);
+    const [indChild, setChildInd] = useState(1);
+    const [tabIndice, setTabIndice] = useState(3);
+
+    function TabClick(x,y){
+      setInd2(x);
+      setOpen(false);
+      setInd(0);
+      setTabIndice(y)
+      setChildInd();
+
+    }
   return (
      <>
-     <SideBarCover SideBarCoverWidth={!active ?"50px" : "253px"} />
-     <Title><b style={{"fontWeight":"bolder","fontSize":"22px"}}>Sociality.</b><span>io</span></Title>
+     <SideBarCover SideBarCoverWidth={!active ?"53px" : "253px"} />
+     <Title width={!active? "0px":"160px"}><b style={{"fontWeight":"bolder","fontSize":"22px"}}>Sociality.</b><span>io</span></Title>
      <MenuStyled>
      { MenuData.map((item,index)=>{
         return(
@@ -185,9 +196,9 @@ export function SideBar() {
              {active&& ind2==index ?<MenuItemPointer   /> : <div />}
              <MenuItemLogo
            
-            onClick={()=>{setInd2(index);!active|| ind2==index ? setActive(!active):setActive(active)}} 
+            onClick={()=>{TabClick(index,item.indice) ;!active|| ind2==index ? setActive(!active):setActive(active)}} 
             disabled={active&& ind2 == index ? false:true} 
-             img={"./img/"+item.path} />
+             img={item.path} />
              </MenuItemsWrapper>
         )
      })}
@@ -197,7 +208,7 @@ export function SideBar() {
       {SideBarData.map((item,index) => {
         return(
             <>
-         
+         <Link to={item.path} style={{"textDecoration":"none"}}>
         <SideBarItem 
         BackgroundColor={ active && ind==index ? "#F55661":"inherit"}
         key={index}
@@ -214,19 +225,21 @@ export function SideBar() {
           </SideBarItemTitle>
           <ItemTicker   display={ active && ind==index ? "block":"none"} />
         </SideBarItem>
-       
+        </Link>
         {item.childrens ?<ItemContent height={open&& ind == index&&item ? "auto":"0"}
          padding={open&& ind == index&&item ? ".25em":"0"}>
             {
                 item.childrens.map((child, ChildIndex)=>{
                     return(
                         <Ul key ={ChildIndex}>
+                           <Link to={child.path} style={{"textDecoration":"none"}}>
                             <Li
                              color={indChild == ChildIndex ? "#F55661":"#fff"}
                              onClick={()=>{setChildInd(ChildIndex);}}>
                                 {child.title}
                              
                              </Li>
+                             </Link>
                            
                         </Ul>
                     )
