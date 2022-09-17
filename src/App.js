@@ -1,12 +1,16 @@
 
 import { GlobalStyle } from "./Styles/GlobalStyle";
+import { Main } from "./Comopenents/Main";
+import { SideBar } from "./Comopenents/SideBar";
 
 function App() {
   return (
     <>
     <GlobalStyle/>
-    <h1>Sociality</h1>
-    <div>  Hello world</div>
+    <Main>
+      <SideBar />
+    </Main>
+ 
     </>
     
   );
